@@ -1,3 +1,5 @@
+#!/app/bin/ruby
+
 # webページに任意の文字を出力させる
 # @param [String] 表示させたい文章
 # @return [nil] 引数が Date 型以外の場合は nil
