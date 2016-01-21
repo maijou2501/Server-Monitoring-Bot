@@ -1,1 +1,1 @@
-web: bundle exec rakeup configure.ru -p $PORT
+web: bundle exec rake configure.ru -p $PORT
