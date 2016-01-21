@@ -23,6 +23,8 @@ class Tweet
 	def daily_tweet
 		#tweet = @text[Time.now.day - 1]
 
+		addr = ENV['CHECK_HOST']
+
 		if ping(addr)
 			tweet = "#{addr}, OK"
 			notify("#{addr}, OK")
