@@ -3,9 +3,6 @@ require 'net/ping'
 require "rubygems"
 require "slack-notifier"
 
-
-$addr = ENV['CHECK_HOST']
-
 # 指定ホストの ping 疎通を確認する
 # @param [String] チェックしたいホスト名
 # @return [Boolean] 成功した場合は TRUE
