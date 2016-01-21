@@ -58,6 +58,7 @@ PLATFORMS
 DEPENDENCIES
   get-twitter-oauth-token
   net-ping
+  rack
   sinatra
   slack-notifier
   twitter
