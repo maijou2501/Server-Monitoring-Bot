@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'twitter'
-require 'alert'
+require_relative './alert.rb'
 
 class Tweet
 	def initialize
