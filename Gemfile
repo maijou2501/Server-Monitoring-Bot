@@ -1,5 +1,6 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-ruby "2.3.0"
+ruby "2.2.3"
 gem  "slack-notifier"
+gem  "net-ping"
