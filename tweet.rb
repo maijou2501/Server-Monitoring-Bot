@@ -25,8 +25,11 @@ class Tweet
 
 		if ping(addr)
 			tweet = "#{addr}, OK"
+			notify("#{addr}, OK")
+
 		else
-			tweet = "#{addr}, OK"
+			tweet = "#{addr}, NG"
+			notify("#{addr}, NG")
 		end
 
 		update(tweet)

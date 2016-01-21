@@ -24,11 +24,3 @@ end
 def notify(text)
 	return Slack::Notifier.new(ENV['WEBHOOK_URL']).ping(text)
 end
-
-# main
-time = Time.now
-if ping(addr)
-	notify("#{time}, #{addr}, OK")
-else
-	return notify(time,", #{addr}, NG")
-end
