@@ -1,1 +1,1 @@
-clock: bundle exec clockwork task.rb
+clock: bundle exec clockwork clock.rb
