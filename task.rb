@@ -1,30 +1,38 @@
+require 'clockwork'
+include Clockwork
 require_relative './tweet.rb'
 
-addr = ENV['CHECK_ADDRESS']
-flag = ENV['CHECK_PROTOCOL']
+handler do |job|
 
-case flag
-when "ICMP"
+	addr = ENV['CHECK_ADDRESS']
+	flag = ENV['CHECK_PROTOCOL']
 
-	if ping(addr)
-		tweet  = ENV['TWEET_SUCCESS']
-		notify = "#{addr}, OK"
+	case flag
+	when "ICMP"
+
+		if ping(addr)
+			tweet  = ENV['TWEET_SUCCESS']
+			notify = "#{addr}, OK"
+		else
+			tweet  = ENV['TWEET_FAIL']
+			notify = "#{addr}, NG"
+		end
+
 	else
-		tweet  = ENV['TWEET_FAIL']
-		notify = "#{addr}, NG"
+
+		if get_status_code(addr) == "200"
+			tweet  = ENV['TWEET_SUCCESS']
+			notify = "#{addr}, OK"
+		else 
+			tweet  = ENV['TWEET_FAIL']
+			notify = "#{addr}, NG"
+		end
+
 	end
 
-else
-
-	if get_status_code(addr) == "200"
-		tweet  = ENV['TWEET_SUCCESS']
-		notify = "#{addr}, OK"
-	else 
-		tweet  = ENV['TWEET_FAIL']
-		notify = "#{addr}, NG"
-	end
+	Tweet.new.tweet(tweet)
+	notify( notify )
 
 end
 
-Tweet.new.tweet(tweet)
-notify( notify )
+every(2.hours, '2hours.job')
