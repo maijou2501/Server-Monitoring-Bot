@@ -18,11 +18,11 @@ class Tweet
 	end
 
 	def daily_tweet
-		addr = ENV['CHECK_HOST']
+		addr = ENV['CHECK_URI']
 
 		case @flag
 		when "http"
-			if get_status_code(addr) == 200
+			if get_status_code(addr) == "200"
 				tweet = ENV['TWEET_SUCCESS']
 				notify("#{addr}, OK")
 			else 

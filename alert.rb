@@ -1,5 +1,5 @@
 require "date"
-require "net/http"
+require 'net/http'
 require 'net/ping'
 require "rubygems"
 require "slack-notifier"
@@ -30,5 +30,3 @@ end
 def get_status_code(uri)
 	timeout(10){ Net::HTTP.get_response(URI.parse(uri)).code }
 end
-
-p get_status_code("g-schedule.com")
