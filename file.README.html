@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Server-Monitoring-Bot
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-Server-Monitoring-Bot">Server-Monitoring-Bot</h1>
+
+<h2 id="label-E6-A6-82-E8-A6-81">概要</h2>
+
+<p>サーバの死活監視を、“ICMP” の疎通確認、または “HTTPステータスコード 200” の確認を用いて行う。<br> 監視結果は、Twitter
+にツイートするか、slack の掲示板書込みを行う。</p>
+
+<h2 id="label-E4-BD-BF-E3-81-84-E6-96-B9">使い方</h2>
+
+<h3 id="label-E4-BD-BF-E7-94-A8-E3-81-99-E3-82-8B-E7-92-B0-E5-A2-83-E5-A4-89-E6-95-B0">使用する環境変数</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># 監視設定
+</span><span class='const'>CHECK_ADDRESS</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># ICMP で監視する場合は、ホスト名 example.com を設定する
+</span><span class='const'>CHECK_INTERVAL</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3.hours</span><span class='tstring_end'>&quot;</span></span>            <span class='comment'># 未定義なら &quot;3.hours&quot; 設定( active_support 形式で設定する)
+</span><span class='const'>CHECK_TIMEOUT</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>5</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら &quot;5&quot; 秒の設定
+</span><span class='comment'># Twitter 設定
+</span><span class='const'>YOUR_CONSUMER_KEY</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
+</span><span class='const'>YOUR_CONSUMER_SECRET</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
+</span><span class='const'>YOUR_ACCESS_TOKEN</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
+</span><span class='const'>YOUR_ACCESS_SECRET</span>   <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
+</span><span class='const'>TWEET_SUCCESS</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>対象が稼働中の時の、Twitterへの書込み内容</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># 未定義なら &quot;稼働中&quot; の設定になる
+</span><span class='const'>TWEET_FAIL</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>対象が停止中の時の、Twitterへの書込み内容</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># 未定義なら &quot;停止中&quot; の設定になる
+</span><span class='comment'># slack 設定
+</span><span class='const'>WEBHOOK_URL</span>   <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://hooks.slack.com/services/xxxxxx</span><span class='tstring_end'>&quot;</span></span>   <span class='comment'># 未定義なら slack への書込みは行わない
+</span><span class='const'>SLACK_SUCCESS</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>対象が稼働中の時の、slackへの書込み内容</span><span class='tstring_end'>&quot;</span></span>   <span class='comment'># 未定義なら &quot;稼働中&quot; の設定になる
+</span><span class='const'>SLACK_FAIL</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>対象が停止中の時の、slackへの書込み内容</span><span class='tstring_end'>&quot;</span></span>   <span class='comment'># 未定義なら &quot;停止中&quot; の設定になる
+</span></code></pre>
+
+<h3 id="label-heroku+-E3-81-A7-E4-BD-BF-E3-81-86">heroku で使う</h3>
+
+<p>ローカル環境で、git コマンドと “Heroku Toolbelt” は既に導入していることが前提です。</p>
+<ul><li>
+<p>死活監視は “HTTPステータスコード 200” を確認する</p>
+</li><li>
+<p>監視結果は Twitter にツイートする</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby">git clone https://github.com/maijou2501/Server-Monitoring-Bot.git
+cd Server-Monitoring-Bot.git
+heroku login
+heroku create
+heroku config:set CHECK_ADDRESS=&quot;http://example.com&quot;
+heroku config:set YOUR_CONSUMER_KEY=&quot;xxxx&quot;
+heroku config:set YOUR_CONSUMER_SECRET=&quot;xxxx&quot;
+heroku config:set YOUR_ACCESS_TOKEN=&quot;xxxx&quot;
+heroku config:set YOUR_ACCESS_SECRET=&quot;xxxx&quot;
+git push heroku master</code></pre>
+
+<p>※ heroku には ping コマンドが無いため、“ICMP” の疎通確認は利用できません。</p>
+
+<h3 id="label-E8-87-AA-E5-89-8D-E3-81-AE-E3-82-B5-E3-83-BC-E3-83-90-E7-92-B0-E5-A2-83-E3-81-A7-E5-AE-9F-E8-A1-8C-E3-81-99-E3-82-8B">自前のサーバ環境で実行する</h3>
+
+<p>サーバに、git・rbenv コマンドを既に導入していることが前提です。</p>
+<ul><li>
+<p>死活監視は “ICMP” 疎通確認を行う</p>
+</li><li>
+<p>監視結果は Twitter へのツイートと、slack への書込みを行う</p>
+</li></ul>
+
+<pre class="code ruby"><code class="ruby">git clone https://github.com/maijou2501/Server-Monitoring-Bot.git
+cd Server-Monitoring-Bot.git
+export CHECK_ADDRESS=&quot;example.com&quot;
+export YOUR_CONSUMER_KEY=&quot;xxxx&quot;
+export YOUR_CONSUMER_SECRET=&quot;xxxx&quot;
+export YOUR_ACCESS_TOKEN=&quot;xxxx&quot;
+export YOUR_ACCESS_SECRET=&quot;xxxx&quot;
+export WEBHOOK_URL=&quot;https://hooks.slack.com/services/xxxx&quot;
+# Ruby 環境
+rbenv install 2.2.3
+rbenv local 2.2.3
+gem bundler
+bundle install
+bundle exec clockwork clock.rb</code></pre>
+
+<h2 id="label-Twitter+-E5-88-A9-E7-94-A8-E6-99-82-E3-81-AE-E6-B3-A8-E6-84-8F">Twitter 利用時の注意</h2>
+
+<p>Twitter の書込みは、Twitter の仕様で前ツイートと同内容の書込みが約12時間ほどできないようでした。<br>
+何が問題かというと、__死活監視が行えているか確認できる粒度が約12時間ほどである__という点です。</p>
+
+<p>ツイート内容に変更を加えるために日付を記載する実装も考えたのですが、__死活監視がちゃんと行えているか確認できるようになる__という意義が自分にはあまりなかったので、前述の実装は見送りました。</p>
+
+<h2 id="label-E3-83-97-E3-83-AD-E3-82-B0-E3-83-A9-E3-83-A0-E3-81-AB-E5-AF-BE-E3-81-99-E3-82-8B-E3-83-89-E3-82-AD-E3-83-A5-E3-83-A1-E3-83-B3-E3-83-88">プログラムに対するドキュメント</h2>
+
+<p>yard で出力したドキュメントをアップロードしています。</p>
+
+<p><a href="http://maijou2501.github.io/Server-Monitoring-Bot/index.html">
+Server-Monitoring-Bot : メインページ </a></p>
+
+<h2 id="label-E5-85-8D-E8-B2-AC">免責</h2>
+
+<p>作者は、本ソフトウェアの使用または使用不能から生じるコンピュータの故障、情報の<br>
+消失、その他あらゆる直接的及び間接的被害に関して一切の責任を負いません。</p>
+
+<p>これに同意できない場合、本ソフトウェアの使用を禁止します。</p>
+
+<h2 id="label-E6-9B-B4-E6-96-B0-E5-B1-A5-E6-AD-B4">更新履歴</h2>
+<ul><li>
+<p>version 1.0 (2016/01/23 ) 公開</p>
+</li></ul>
+
+<h2 id="label-E8-AC-9D-E8-BE-9E">謝辞</h2>
+
+<p>“ruedap” さん、“motoso” さんの記事に影響を受けて作成を思い立ち、プログラムも一部流用させていただきました。<br>
+この場を借りて、感謝を申し上げます。</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Sun Jan 24 00:19:24 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.3).
+</div>
+
+  </body>
+</html>
