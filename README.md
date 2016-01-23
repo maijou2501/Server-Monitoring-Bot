@@ -83,14 +83,14 @@ bundle exec clockwork clock.rb
 Twitter の書込みは、Twitter の仕様で前ツイートと同内容の書込みが約12時間ほどできないようでした。  
 何が問題かというと、__死活監視が行えているか確認できる粒度が約12時間ほどである__という点です。
 
-ツイート内容に変更を加えるために日付を記載する実装も考えたのですが、__死活監視がちゃんと行えているか確認できるようになる__という意義が自分にはあまりなかったので、前述の実装は見送りました。
+ツイート内容に変更を加えるために日付を記載する実装も考えたのですが、一日に2回は監視botが動いていることが分かることを良とし、前述の実装は見送りました。
 
 
 ## プログラムに対するドキュメント
 
 yard で出力したドキュメントをアップロードしています。
 
-[ Server-Monitoring-Bot : メインページ ]( http://maijou2501.github.io/Server-Monitoring-Bot/index.html )
+[ Server-Monitoring-Bot ]( http://maijou2501.github.io/Server-Monitoring-Bot/frames.html#!file.README.html )
 
 
 ## 免責
