@@ -2,3 +2,5 @@ language: ruby
 rvm:
 - 2.2.3
 script: bundle exec clockwork clock.rb
+git:
+  submodules: false
