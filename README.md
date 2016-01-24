@@ -14,7 +14,7 @@ Server-Monitoring-Bot
 ```
 # 監視設定
 CHECK_ADDRESS  ="http://example.com" # ICMP で監視する場合は、ホスト名 example.com を設定する
-CHECK_INTERVAL ="3.hours"            # 未定義なら "3.hours" 設定( active_support 形式で設定する)
+CHECK_INTERVAL ="3.hours"            # 未定義なら "3.hours" 設定
 CHECK_TIMEOUT  ="5"                  # ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら "5" 秒の設定
 # Twitter 設定
 YOUR_CONSUMER_KEY    ="xxxx"         # 未定義なら、ツイートは行わない
@@ -74,7 +74,7 @@ rbenv install 2.2.3
 rbenv local 2.2.3
 gem bundler
 bundle install
-bundle exec clockwork clock.rb
+bundle exec clockworkd -c clock.rb start --log
 ```
 
 
