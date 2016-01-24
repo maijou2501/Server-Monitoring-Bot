@@ -14,7 +14,7 @@ Server-Monitoring-Bot
 ```
 # 監視設定
 CHECK_ADDRESS  ="http://example.com" # ICMP で監視する場合は、ホスト名 example.com を設定する
-CHECK_INTERVAL ="3.hours"            # 未定義なら "3.hours" 設定
+CHECK_INTERVAL ="3"                  # 監視間隔[hour]を設定。未定義なら "3" 時間のインターバル設定
 CHECK_TIMEOUT  ="5"                  # ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら "5" 秒の設定
 # Twitter 設定
 YOUR_CONSUMER_KEY    ="xxxx"         # 未定義なら、ツイートは行わない
@@ -73,6 +73,14 @@ export WEBHOOK_URL="https://hooks.slack.com/services/xxxx"
 rbenv install 2.2.3
 rbenv local 2.2.3
 gem bundler
+bundle install
+nohup clockwork clock.rb &
+```
+
+nohup ではなく、デーモンとして動かしたい場合は nohup の代わりに下記を実行する。
+
+```
+echo "gem 'daemons'" >> Gemfile 
 bundle install
 bundle exec clockworkd -c clock.rb start --log
 ```
