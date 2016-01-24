@@ -75,7 +75,7 @@
 
 <pre class="code ruby"><code class="ruby"><span class='comment'># 監視設定
 </span><span class='const'>CHECK_ADDRESS</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># ICMP で監視する場合は、ホスト名 example.com を設定する
-</span><span class='const'>CHECK_INTERVAL</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3.hours</span><span class='tstring_end'>&quot;</span></span>            <span class='comment'># 未定義なら &quot;3.hours&quot; 設定( active_support 形式で設定する)
+</span><span class='const'>CHECK_INTERVAL</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># 監視間隔[hour]を設定。未定義なら &quot;3&quot; 時間のインターバル設定
 </span><span class='const'>CHECK_TIMEOUT</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>5</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら &quot;5&quot; 秒の設定
 </span><span class='comment'># Twitter 設定
 </span><span class='const'>YOUR_CONSUMER_KEY</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
@@ -134,21 +134,28 @@ rbenv install 2.2.3
 rbenv local 2.2.3
 gem bundler
 bundle install
-bundle exec clockwork clock.rb</code></pre>
+nohup clockwork clock.rb &amp;</code></pre>
+
+<p>nohup ではなく、デーモンとして動かしたい場合は nohup の代わりに下記を実行する。</p>
+
+<pre class="code ruby"><code class="ruby">echo &quot;gem &#39;daemons&#39;&quot; &gt;&gt; Gemfile 
+bundle install
+bundle exec clockworkd -c clock.rb start --log</code></pre>
 
 <h2 id="label-Twitter+-E5-88-A9-E7-94-A8-E6-99-82-E3-81-AE-E6-B3-A8-E6-84-8F">Twitter 利用時の注意</h2>
 
 <p>Twitter の書込みは、Twitter の仕様で前ツイートと同内容の書込みが約12時間ほどできないようでした。<br>
 何が問題かというと、__死活監視が行えているか確認できる粒度が約12時間ほどである__という点です。</p>
 
-<p>ツイート内容に変更を加えるために日付を記載する実装も考えたのですが、__死活監視がちゃんと行えているか確認できるようになる__という意義が自分にはあまりなかったので、前述の実装は見送りました。</p>
+<p>ツイート内容に変更を加えるために日付を記載する実装も考えたのですが、一日に2回は監視botが動いていることが分かることを良しとし、前述の実装は見送りました。</p>
 
 <h2 id="label-E3-83-97-E3-83-AD-E3-82-B0-E3-83-A9-E3-83-A0-E3-81-AB-E5-AF-BE-E3-81-99-E3-82-8B-E3-83-89-E3-82-AD-E3-83-A5-E3-83-A1-E3-83-B3-E3-83-88">プログラムに対するドキュメント</h2>
 
 <p>yard で出力したドキュメントをアップロードしています。</p>
 
-<p><a href="http://maijou2501.github.io/Server-Monitoring-Bot/index.html">
-Server-Monitoring-Bot : メインページ </a></p>
+<p><a
+href="http://maijou2501.github.io/Server-Monitoring-Bot/frames.html#!file.README.html">
+Server-Monitoring-Bot </a></p>
 
 <h2 id="label-E5-85-8D-E8-B2-AC">免責</h2>
 
@@ -169,7 +176,7 @@ Server-Monitoring-Bot : メインページ </a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Sun Jan 24 00:19:24 2016 by
+  Generated on Sun Jan 24 23:04:23 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>
