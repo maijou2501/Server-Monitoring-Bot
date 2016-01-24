@@ -1,6 +1,7 @@
 language: ruby
-script: bundle exec clockwork clock.rb
+cache: bundler
 git:
   submodules: false
 env:
   - CHECK_ADDRESS="https://www.example.com/"
+script: ruby -r "./task.rb" -e 'Task.new.exec'
