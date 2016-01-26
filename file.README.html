@@ -66,7 +66,7 @@
 
 <h2 id="label-E6-A6-82-E8-A6-81">概要</h2>
 
-<p>サーバの死活監視を、“ICMP” の疎通確認、または “HTTPステータスコード 200” の確認を用いて行う。<br> 監視結果は、Twitter
+<p>サーバの死活監視を、“ping” の疎通確認、または “HTTPステータスコード 200” の確認を用いて行う。<br> 監視結果は、Twitter
 にツイートするか、slack の掲示板書込みを行う。</p>
 
 <h2 id="label-E4-BD-BF-E3-81-84-E6-96-B9">使い方</h2>
@@ -74,9 +74,9 @@
 <h3 id="label-E4-BD-BF-E7-94-A8-E3-81-99-E3-82-8B-E7-92-B0-E5-A2-83-E5-A4-89-E6-95-B0">使用する環境変数</h3>
 
 <pre class="code ruby"><code class="ruby"><span class='comment'># 監視設定
-</span><span class='const'>CHECK_ADDRESS</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># ICMP で監視する場合は、ホスト名 example.com を設定する
+</span><span class='const'>CHECK_ADDRESS</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># ping で監視する場合は、ホスト名 example.com を設定する
 </span><span class='const'>CHECK_INTERVAL</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># 監視間隔[hour]を設定。未定義なら &quot;3&quot; 時間のインターバル設定
-</span><span class='const'>CHECK_TIMEOUT</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>5</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら &quot;5&quot; 秒の設定
+</span><span class='const'>CHECK_TIMEOUT</span>  <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>5</span><span class='tstring_end'>&quot;</span></span>                  <span class='comment'># ping とHTTPリクエストのタイムアウト時間[s]。未定義なら &quot;5&quot; 秒の設定
 </span><span class='comment'># Twitter 設定
 </span><span class='const'>YOUR_CONSUMER_KEY</span>    <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
 </span><span class='const'>YOUR_CONSUMER_SECRET</span> <span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xxxx</span><span class='tstring_end'>&quot;</span></span>         <span class='comment'># 未定義なら、ツイートは行わない
@@ -110,13 +110,13 @@ heroku config:set YOUR_ACCESS_TOKEN=&quot;xxxx&quot;
 heroku config:set YOUR_ACCESS_SECRET=&quot;xxxx&quot;
 git push heroku master</code></pre>
 
-<p>※ heroku には ping コマンドが無いため、“ICMP” の疎通確認は利用できません。</p>
+<p>※ heroku には ping コマンドが無いため、“ping” の疎通確認は利用できません。</p>
 
 <h3 id="label-E8-87-AA-E5-89-8D-E3-81-AE-E3-82-B5-E3-83-BC-E3-83-90-E7-92-B0-E5-A2-83-E3-81-A7-E5-AE-9F-E8-A1-8C-E3-81-99-E3-82-8B">自前のサーバ環境で実行する</h3>
 
 <p>サーバに、git・rbenv コマンドを既に導入していることが前提です。</p>
 <ul><li>
-<p>死活監視は “ICMP” 疎通確認を行う</p>
+<p>死活監視は “ping” 疎通確認を行う</p>
 </li><li>
 <p>監視結果は Twitter へのツイートと、slack への書込みを行う</p>
 </li></ul>
@@ -124,6 +124,7 @@ git push heroku master</code></pre>
 <pre class="code ruby"><code class="ruby">git clone https://github.com/maijou2501/Server-Monitoring-Bot.git
 cd Server-Monitoring-Bot.git
 export CHECK_ADDRESS=&quot;example.com&quot;
+export CHECK_PROTOCOL=&quot;ICMP&quot;
 export YOUR_CONSUMER_KEY=&quot;xxxx&quot;
 export YOUR_CONSUMER_SECRET=&quot;xxxx&quot;
 export YOUR_ACCESS_TOKEN=&quot;xxxx&quot;
@@ -176,7 +177,7 @@ Server-Monitoring-Bot </a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Sun Jan 24 23:04:23 2016 by
+  Generated on Wed Jan 27 02:09:27 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>
