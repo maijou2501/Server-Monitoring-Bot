@@ -20,21 +20,19 @@ class Check
 	# 指定アドレスの疎通を確認する
 	# @return [Integer] 疎通成功した場合は 0, その他は nil
 	def exec
-		unless @addr
-			STDERR.print("Check Address is undifined.")
-		else
-			case @proto
-			when "ICMP"
-				ping
-			when "HTTP"
-				unless ( URI.split(@addr).first == 'http' rescue false )
-					STDERR.print("Format is wrong : #{@addr}")
-				else
-					get_status_code == HTTP_OK ? 0 : nil
-				end
+		return STDERR.print("Check Address is undifined.") unless @addr
+
+		case @proto
+		when "ICMP"
+			ping
+		when "HTTP"
+			unless ( URI.split(@addr).first == 'http' rescue false )
+				STDERR.print("Format is wrong : #{@addr}")
 			else
-				STDERR.print("Set protcol is invalid : #{@proto}")
+				get_status_code == HTTP_OK ? 0 : nil
 			end
+		else
+			STDERR.print("Set protcol is invalid : #{@proto}")
 		end
 	end
 

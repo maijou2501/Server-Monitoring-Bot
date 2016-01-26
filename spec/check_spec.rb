@@ -55,6 +55,7 @@ RSpec.describe Check do
 		ping_ok = Check.new
 		ping_ok.addr = "example.com"
 		ping_ok.proto = "ICMP"
+		ping_ok.time_out = 10
 		expect(ping_ok.exec).to eq 0
 	end
 

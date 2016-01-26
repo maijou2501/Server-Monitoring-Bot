@@ -1,7 +1,9 @@
 Server-Monitoring-Bot
 =====================
 
+[![Build Status](https://travis-ci.org/maijou2501/Server-Monitoring-Bot.svg?branch=master)](https://travis-ci.org/maijou2501/Server-Monitoring-Bot)
 [![Code Climate](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot/badges/gpa.svg)](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot)
+[![Test Coverage](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot/badges/coverage.svg)](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot/coverage)
 
 ## 概要
 
