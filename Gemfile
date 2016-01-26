@@ -6,3 +6,7 @@ gem "http"
 gem "net-ping"
 gem "slack-notifier"
 gem "twitter"
+
+group :development, :test do
+	gem "codeclimate-test-reporter", require: nil
+end

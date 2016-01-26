@@ -1,0 +1,17 @@
+example_id                 | status | run_time        |
+-------------------------- | ------ | --------------- |
+./spec/check_spec.rb[1:1]  | passed | 0.00018 seconds |
+./spec/check_spec.rb[1:2]  | passed | 0.00077 seconds |
+./spec/check_spec.rb[1:3]  | passed | 0.36212 seconds |
+./spec/check_spec.rb[1:4]  | passed | 0.22371 seconds |
+./spec/check_spec.rb[1:5]  | passed | 1 second        |
+./spec/check_spec.rb[1:6]  | passed | 0.00024 seconds |
+./spec/check_spec.rb[1:7]  | passed | 0.00078 seconds |
+./spec/check_spec.rb[1:8]  | passed | 0.00011 seconds |
+./spec/check_spec.rb[1:9]  | passed | 0.27923 seconds |
+./spec/check_spec.rb[1:10] | passed | 0.07504 seconds |
+./spec/check_spec.rb[1:11] | passed | 1.11 seconds    |
+./spec/slack_spec.rb[1:1]  | passed | 0.00011 seconds |
+./spec/task_spec.rb[1:1]   | passed | 0.00011 seconds |
+./spec/tweet_spec.rb[1:1]  | passed | 0.0009 seconds  |
+./spec/tweet_spec.rb[1:2]  | passed | 0.0008 seconds  |

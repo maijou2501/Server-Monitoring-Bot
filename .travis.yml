@@ -2,6 +2,7 @@ language: ruby
 cache: bundler
 git:
   submodules: false
-env:
-  - CHECK_ADDRESS="https://www.example.com/"
-script: ruby -r "./task.rb" -e 'Task.new.exec'
+addons:
+  code_climate:
+    repo_token: ab48a7f196c40f56267a221a2996f41d9dc7ab34f72893b329852da413e16e6c
+script: bundle exec rspec

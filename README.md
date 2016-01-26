@@ -3,7 +3,7 @@ Server-Monitoring-Bot
 
 ## 概要
 
-サーバの死活監視を、"ICMP" の疎通確認、または "HTTPステータスコード 200" の確認を用いて行う。  
+サーバの死活監視を、"ping" の疎通確認、または "HTTPステータスコード 200" の確認を用いて行う。  
 監視結果は、Twitter にツイートするか、slack の掲示板書込みを行う。
 
 
@@ -13,9 +13,9 @@ Server-Monitoring-Bot
 
 ```
 # 監視設定
-CHECK_ADDRESS  ="http://example.com" # ICMP で監視する場合は、ホスト名 example.com を設定する
+CHECK_ADDRESS  ="http://example.com" # ping で監視する場合は、ホスト名 example.com を設定する
 CHECK_INTERVAL ="3"                  # 監視間隔[hour]を設定。未定義なら "3" 時間のインターバル設定
-CHECK_TIMEOUT  ="5"                  # ICMP とHTTPリクエストのタイムアウト時間[s]。未定義なら "5" 秒の設定
+CHECK_TIMEOUT  ="5"                  # ping とHTTPリクエストのタイムアウト時間[s]。未定義なら "5" 秒の設定
 # Twitter 設定
 YOUR_CONSUMER_KEY    ="xxxx"         # 未定義なら、ツイートは行わない
 YOUR_CONSUMER_SECRET ="xxxx"         # 未定義なら、ツイートは行わない
@@ -50,20 +50,21 @@ heroku config:set YOUR_ACCESS_SECRET="xxxx"
 git push heroku master
 ```
 
-※ heroku には ping コマンドが無いため、"ICMP" の疎通確認は利用できません。
+※ heroku には ping コマンドが無いため、"ping" の疎通確認は利用できません。
 
 
 ### 自前のサーバ環境で実行する
 
 サーバに、git・rbenv コマンドを既に導入していることが前提です。
 
-* 死活監視は "ICMP" 疎通確認を行う
+* 死活監視は "ping" 疎通確認を行う
 * 監視結果は Twitter へのツイートと、slack への書込みを行う
 
 ```sh
 git clone https://github.com/maijou2501/Server-Monitoring-Bot.git
 cd Server-Monitoring-Bot.git
 export CHECK_ADDRESS="example.com"
+export CHECK_PROTOCOL="ICMP"
 export YOUR_CONSUMER_KEY="xxxx"
 export YOUR_CONSUMER_SECRET="xxxx"
 export YOUR_ACCESS_TOKEN="xxxx"
@@ -111,6 +112,7 @@ yard で出力したドキュメントをアップロードしています。
 
 ## 更新履歴
 
+* version 1.1 (2016/01/27 ) 返り値チェック・エラーハンドリングを追加
 * version 1.0 (2016/01/23 ) 公開
 
 
