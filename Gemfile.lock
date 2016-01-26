@@ -14,6 +14,7 @@ GEM
       tzinfo
     codeclimate-test-reporter (0.4.8)
       simplecov (>= 0.7.1, < 1.0.0)
+    diff-lcs (1.2.5)
     docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
@@ -40,6 +41,19 @@ GEM
     naught (1.1.0)
     net-ping (1.7.8)
     oauth (0.4.7)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     simple_oauth (0.3.1)
     simplecov (0.11.1)
       docile (~> 1.1.0)
@@ -74,6 +88,7 @@ DEPENDENCIES
   get-twitter-oauth-token
   http
   net-ping
+  rspec
   slack-notifier
   twitter
 

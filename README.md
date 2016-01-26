@@ -1,6 +1,8 @@
 Server-Monitoring-Bot
 =====================
 
+[![Code Climate](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot/badges/gpa.svg)](https://codeclimate.com/github/maijou2501/Server-Monitoring-Bot)
+
 ## 概要
 
 サーバの死活監視を、"ping" の疎通確認、または "HTTPステータスコード 200" の確認を用いて行う。  
