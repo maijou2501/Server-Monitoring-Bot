@@ -255,12 +255,14 @@
 13
 14
 15
-16</pre>
+16
+17</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/tweet.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
+	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>true</span>
 	<span class='ivar'>@client</span> <span class='op'>=</span> <span class='const'>Twitter</span><span class='op'>::</span><span class='const'>REST</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
 		<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_consumer_key'>consumer_key</span>        <span class='op'>=</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YOUR_CONSUMER_KEY</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
 		<span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_consumer_secret'>consumer_secret</span>     <span class='op'>=</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YOUR_CONSUMER_SECRET</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -345,7 +347,6 @@ the last Tweet from the user&#39;s timeline.</p>
       <pre class="lines">
 
 
-21
 22
 23
 24
@@ -358,28 +359,15 @@ the last Tweet from the user&#39;s timeline.</p>
 31
 32
 33
-34
-35
-36
-37
-38
-39
-40</pre>
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tweet.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/tweet.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tweet'>tweet</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
 	<span class='kw'>return</span> <span class='const'>STDERR</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No Tweet text</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_text'>text</span>
 
-	<span class='comment'># 必要なAPIキーが設定されているか確認する
-</span>	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>true</span>
-	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@client</span><span class='op'>::</span><span class='id identifier rubyid_consumer_key'>consumer_key</span>
-	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@client</span><span class='op'>::</span><span class='id identifier rubyid_consumer_secret'>consumer_secret</span>
-	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@client</span><span class='op'>::</span><span class='id identifier rubyid_access_token'>access_token</span>
-	<span class='ivar'>@flag</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='ivar'>@client</span><span class='op'>::</span><span class='id identifier rubyid_access_token_secret'>access_token_secret</span>
-
-	<span class='kw'>unless</span> <span class='ivar'>@flag</span>
+	<span class='kw'>unless</span> <span class='ivar'>@flag</span> <span class='op'>=</span> <span class='id identifier rubyid_test'>test</span>
 		<span class='const'>STDERR</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Some Twitter API key are NOT exported.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 	<span class='kw'>else</span> 
 		<span class='kw'>begin</span>
@@ -399,7 +387,7 @@ the last Tweet from the user&#39;s timeline.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Jan 27 02:09:27 2016 by
+  Generated on Wed Jan 27 03:20:14 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.3).
 </div>
